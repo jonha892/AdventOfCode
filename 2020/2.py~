@@ -1,0 +1,22 @@
+
+def range_helper(s):
+    r = s.split('-')
+    return (int(r[0]), int(r[1]))
+
+def row_helper(row):
+    min_, max_ = range_helper(row[0))
+    c = row[1][0]
+    return (min_, max_, c_, row[2])
+
+def is_valid_pwd(min_, max_, c, pwd):
+    count = pwd.count(c)
+    if count >= min_ and count <= max_:
+        return true
+    return false
+
+with open('2.txt', 'r') as f:
+    data = [x.split(' ') for x in r.readlines()]
+    data = list(map(lambda x: row_helper(x), data))
+
+    p1 = len(list(data.filter(is_valid_pwd, data)))
+    print(p1)
