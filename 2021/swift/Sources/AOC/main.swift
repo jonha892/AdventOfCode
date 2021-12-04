@@ -1,4 +1,4 @@
-let day = Day3()
+let day = Day4()
 let p1 = day.part1()
 print("Part 1 solution:", p1)
 let p2 = day.part2()

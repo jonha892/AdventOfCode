@@ -15,6 +15,7 @@ open class Day {
         let path = FileManager.default.currentDirectoryPath + suffix
         print("Loading input lines from: \t", path)
         let input = try! String(contentsOfFile: path)
+
         return input.components(separatedBy: "\n")
     }
 
