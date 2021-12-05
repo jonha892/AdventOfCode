@@ -24,7 +24,7 @@ class Day3: Day{
     override func part2() -> Int {
         var oxygenGeneratorRating = -1
         var co2ScrubberRating = -1
-        var diagnosticLength = self.inputLines[0].count
+        let diagnosticLength = self.inputLines[0].count
         var oxygenRemaining = self.inputLines.map { $0.map { $0 == "1" ? true : false }}
         var co2ScrubberRemaining = oxygenRemaining
 
