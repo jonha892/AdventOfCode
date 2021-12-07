@@ -1,4 +1,4 @@
-public class Matrix<T: Hashable>: CustomStringConvertible {
+public class Matrix<T: Hashable & Numeric>: CustomStringConvertible {
     public private(set) var data: Array<Array<T>>
     
     public var rowCount: Int { return data.count }
@@ -66,5 +66,30 @@ public class Matrix<T: Hashable>: CustomStringConvertible {
 
     public func getAll() -> [T] {
         return Array(self.data.joined())
+    }
+
+    public func times(right: Vector<T>) throws -> Vector<T> {
+        if self.colCount != right.dim {
+            return Vector(data: [])
+        }
+        var result: [T] = []
+        for row in self.data {
+            let value = zip(row, right.data).map{ $0.0 * $0.1}.reduce(0, { r, c in r + c })
+            result.append(value)
+        }
+        return Vector(data: result)
+    }
+}
+
+
+enum MatrixError {
+    case invalidMultiplication(Int, Int)
+}
+
+extension MatrixError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .invalidMultiplication(let matDim, let vecDim): return "Cannot multiply matrix with \(matDim) columns and a vector of dim \(vecDim)"
+        }
     }
 }
