@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug AOC",
+            "program": "${workspaceFolder:swift}/.build/debug/AOC",
+            "args": [],
+            "cwd": "${workspaceFolder:swift}",
+            "preLaunchTask": "swift: Build Debug AOC"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Release AOC",
+            "program": "${workspaceFolder:swift}/.build/release/AOC",
+            "args": [],
+            "cwd": "${workspaceFolder:swift}",
+            "preLaunchTask": "swift: Build Release AOC"
+        }
+    ]
+}

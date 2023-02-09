@@ -30,11 +30,10 @@ class Day7: Day{
         } catch {
             print(error)
         }
-        return -1
     }
 
     override func part2() -> Int {
-        var hpos = self.inputLines[0].components(separatedBy: ",").map { Int($0)! }
+        let hpos = self.inputLines[0].components(separatedBy: ",").map { Int($0)! }
         let min = hpos.min()!
         let max = hpos.max()!
         var minFuel = -1

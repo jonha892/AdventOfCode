@@ -1,0 +1,167 @@
+#!/home/jonas/swift/swift-5.7.1-RELEASE-ubuntu20.04/usr/bin/swift
+
+import Foundation
+
+let today = Date()
+let calendar = Calendar(identifier: .gregorian)
+
+let day = calendar.component(.day, from: today)
+let month = calendar.component(.month, from: today)
+let year = calendar.component(.year, from: today)
+let todayString = "\(day).\(month).\(year % 100)"
+
+let u = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+let sources = u.appendingPathComponent("Sources")
+let yearFolder = sources.appendingPathComponent("AOC\(year)")
+let dataFolder = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("data")
+
+print("Creating \(yearFolder.path)")
+
+mkdir(yearFolder)
+
+
+let mainContents = """
+//
+//  AOC\(year).swift
+//  
+//  Created by... >.>
+//  jonha892 on \(todayString).
+//
+
+import Foundation
+
+@_exported import AOCCore
+
+public struct AOC\(year) {
+    
+    public static let days: Array<any Day> = [
+        Day1(),
+        Day2(),
+        Day3(),
+        Day4(),
+        Day5(),
+        Day6(),
+        Day7(),
+        Day8(),
+        Day9(),
+        Day10(),
+        Day11(),
+        Day12(),
+        Day13(),
+        Day14(),
+        Day15(),
+        Day16(),
+        Day17(),
+        Day18(),
+        Day19(),
+        Day20(),
+        Day21(),
+        Day22(),
+        Day23(),
+        Day24(),
+        Day25(),
+    ]
+    
+    public static func day(_ number: Int) -> any Day {
+        let idx = number - 1
+        guard AOC2022.days.indices.contains(idx) else { return InvalidDay() }
+        return AOC2022.days[idx]
+    }
+}
+
+public struct InvalidDay: Day {
+    public static var day: UInt8 = 0
+}
+
+"""
+mainContents >> yearFolder.appendingPathComponent("AOC\(year).swift")
+
+for day in 1 ... 25 {
+    //let dayFolder = yearFolder.appendingPathComponent("Day \(day)")
+    //mkdir(dayFolder)
+    
+    let dayContents = """
+    //
+    //  Day\(day).swift
+    //  AOC\(year)
+    //
+    //  Created by... >.>
+    //  jonha892 on \(todayString).
+    //
+
+    class Day\(day): Day {
+        
+        static var day: UInt8 { \(day) }
+    
+        func part1() async throws -> String {
+            return #function
+        }
+    
+        func part2() async throws -> String {
+            return #function
+        }
+    
+        func run() async throws -> (String, String) {
+            let p1 = try await part1()
+            let p2 = try await part2()
+            return (p1, p2)
+        }
+    
+    }
+    """
+    dayContents >> yearFolder.appendingPathComponent("Day\(day).swift")
+
+    "" >> dataFolder.appendingPathComponent("input_\(String(format: "%02d", day)).txt")
+}
+
+let testFile = u.appendingPathComponent("Tests").appendingPathComponent("AOCTests").appendingPathComponent("Test\(year).swift")
+
+var contents = """
+//
+//  Test\(year).swift
+//  AOCTests
+//
+//  Created by... >.>
+//  jonha892 on \(todayString).
+//
+
+import XCTest
+@testable import AOC\(year)
+
+class Test\(year): XCTestCase {
+"""
+
+for day in 1 ... 25 {
+    let testContents = """
+    
+    
+        func testDay\(day)() async throws {
+            let d = Day\(day)()
+            let (p1, p2) = try await d.run()
+
+            XCTAssertEqual(p1, "")
+            XCTAssertEqual(p2, "")
+        }
+    """
+    contents += testContents
+}
+
+contents += """
+
+}
+
+"""
+contents >> testFile
+
+func mkdir(_ path: URL) {
+    try? FileManager.default.createDirectory(at: path, withIntermediateDirectories: true, attributes: nil)
+}
+
+infix operator >>
+func >> (lhs: String, rhs: URL) {
+    do {
+        try Data(lhs.utf8).write(to: rhs, options: [])
+    } catch {
+        print("unexpected error: \(error).")
+    }
+}

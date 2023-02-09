@@ -1,0 +1,40 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug 2022",
+            "program": "${workspaceFolder:2022}/.build/debug/2022",
+            "args": [],
+            "cwd": "${workspaceFolder:2022}",
+            "preLaunchTask": "swift: Build Debug 2022"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Release 2022",
+            "program": "${workspaceFolder:2022}/.build/release/2022",
+            "args": [],
+            "cwd": "${workspaceFolder:2022}",
+            "preLaunchTask": "swift: Build Release 2022"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug advent",
+            "program": "${workspaceFolder:2022}/.build/debug/advent",
+            "args": [],
+            "cwd": "${workspaceFolder:2022}",
+            "preLaunchTask": "swift: Build Debug advent"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Release advent",
+            "program": "${workspaceFolder:2022}/.build/release/advent",
+            "args": [],
+            "cwd": "${workspaceFolder:2022}",
+            "preLaunchTask": "swift: Build Release advent"
+        }
+    ]
+}
