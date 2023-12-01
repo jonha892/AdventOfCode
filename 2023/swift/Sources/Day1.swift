@@ -81,16 +81,15 @@ class Day1: Day {
 
     var calibrations: [Int] = []
     for line in lines {
-      // find first number
       let first = line.firstIndex(where: { $0.isNumber })
-      // find last number
       let last = line.lastIndex(where: { $0.isNumber })
+
       if let first = first, let last = last {
-        let firstNumber = line[first].wholeNumberValue!
-        let lastNumber = line[last].wholeNumberValue!
-        calibrations.append(firstNumber * 10 + lastNumber)
+        let firstNumberIdx = line[first].wholeNumberValue!
+        let lastNumberIdx = line[last].wholeNumberValue!
+        calibrations.append(firstNumberIdx * 10 + lastNumberIdx)
       } else {
-        print("no numbers found in line: \(line)")
+        print("ERROR: no numbers found in line: \(line)")
         return ""
       }
     }
@@ -103,33 +102,19 @@ class Day1: Day {
 
     var calibrations: [Int] = []
     for l in lines {
-      print()
+      print(l)
       let line = String(l)
 
-      // find first number
       let firstDigitStr = line.findDigit(which: .first)
-      // find last number
       let lastDigitStr = line.findDigit(which: .last)
 
-      let firstNumber = line.firstIndex(where: { $0.isNumber })
-      // find last number
-      let lastNumber = line.lastIndex(where: { $0.isNumber })
-
-      //print("line: \(line)")
-      //print(
-      //  "firstDigitStr: \(firstDigitStr.0.utf16Offset(in: line)) lastDigitStr: \(lastDigitStr.0.utf16Offset(in: line))"
-      //)
-      //print("\(firstDigitStr.1 ?? -1) \(lastDigitStr.1 ?? -1)")
-      //print(
-      //  "firstNumber: \(String(describing: firstNumber?.utf16Offset(in: line))) lastNumber: \(String(describing: lastNumber?.utf16Offset(in: line)))"
-      //)
-      //print("last number value \(line[lastNumber!].wholeNumberValue!)")
-      //print("\(lastNumber! > lastDigitStr.0)")
+      let firstNumberIdx = line.firstIndex(where: { $0.isNumber })
+      let lastNumberIdx = line.lastIndex(where: { $0.isNumber })
 
       var first = -1
-      if let firstNumber = firstNumber {
-        if firstNumber < firstDigitStr.0 {
-          first = line[firstNumber].wholeNumberValue!
+      if let firstNumberIdx = firstNumberIdx {
+        if firstNumberIdx < firstDigitStr.0 {
+          first = line[firstNumberIdx].wholeNumberValue!
         } else {
           first = firstDigitStr.1!
         }
@@ -138,9 +123,9 @@ class Day1: Day {
       }
 
       var last = -1
-      if let lastNumber = lastNumber {
-        if lastNumber > lastDigitStr.0 || lastDigitStr.1 == nil {
-          last = line[lastNumber].wholeNumberValue!
+      if let lastNumberIdx = lastNumberIdx {
+        if lastNumberIdx > lastDigitStr.0 || lastDigitStr.1 == nil {
+          last = line[lastNumberIdx].wholeNumberValue!
         } else {
           last = lastDigitStr.1!
         }
