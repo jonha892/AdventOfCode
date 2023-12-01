@@ -3,4 +3,10 @@
 
 import Foundation
 
-print("Hello, world!")
+let input_path = "data/day_1.txt"
+var input = parseInput(url: input_path)
+
+let day = Day1(input: input)
+
+print("part 1:", day.partOne())
+print("part 2:", day.partTwo())
