@@ -37,7 +37,7 @@ class Day3: Day {
     return false
   }
 
-  func partOne() -> String {
+  func partOne() -> Int {
     var adjecent: [Int] = []
 
     for (i, line) in lines.enumerated() {
@@ -53,7 +53,7 @@ class Day3: Day {
       }
     }
     print("adjecent = \(adjecent.count)")
-    return "\(adjecent.reduce(0, +))"
+    return adjecent.reduce(0, +)
   }
 
   private func rangeToOffset(_ range: Range<String.Index>, in line: String) -> (Int, Int) {
@@ -74,7 +74,7 @@ class Day3: Day {
     let xEnd: Int
   }
 
-  func partTwo() -> String {
+  func partTwo() -> Int {
     let numbers = lines.enumerated().flatMap { (y: Int, line: String) in
       line.matches(of: ##/(\d+)/##).map({
         let (startX, endX) = rangeToOffset($0.range, in: line)
@@ -119,6 +119,6 @@ class Day3: Day {
       }
     }
     let sum = ratios.reduce(0, +)
-    return "\(sum)"
+    return sum
   }
 }

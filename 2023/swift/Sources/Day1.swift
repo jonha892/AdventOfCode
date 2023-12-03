@@ -76,7 +76,7 @@ class Day1: Day {
     self.input = input
   }
 
-  func partOne() -> String {
+  func partOne() -> Int {
     let lines = input.split(separator: "\n")
 
     var calibrations: [Int] = []
@@ -90,14 +90,14 @@ class Day1: Day {
         calibrations.append(firstNumberIdx * 10 + lastNumberIdx)
       } else {
         print("ERROR: no numbers found in line: \(line)")
-        return ""
+        return -1
       }
     }
 
-    return String(calibrations.reduce(0, +))
+    return calibrations.reduce(0, +)
   }
 
-  func partTwo() -> String {
+  func partTwo() -> Int {
     let lines = input.split(separator: "\n")
 
     var calibrations: [Int] = []
@@ -139,6 +139,6 @@ class Day1: Day {
       calibrations.append(c)
     }
 
-    return String(calibrations.reduce(0, +))
+    return calibrations.reduce(0, +)
   }
 }

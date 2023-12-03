@@ -85,13 +85,13 @@ class Day2: Day {
     return Game(id: 0, revealings: [])
   }
 
-  func partOne() -> String {
+  func partOne() -> Int {
     var games: [Game] = []
     do {
       games = try input.components(separatedBy: "\n").map(parseGame)
     } catch {
       print("invalid input")
-      return ""
+      return -1
     }
 
     let max = [
@@ -112,16 +112,16 @@ class Day2: Day {
     })
     let validIds = validGames.map { $0.id }
 
-    return "\(validIds.reduce(0, +))"
+    return validIds.reduce(0, +)
   }
 
-  func partTwo() -> String {
+  func partTwo() -> Int {
     var games: [Game] = []
     do {
       games = try input.components(separatedBy: "\n").map(parseGame)
     } catch {
       print("invalid input")
-      return ""
+      return -1
     }
 
     let powers = games.map({
@@ -141,7 +141,6 @@ class Day2: Day {
       return min[Color.red]! * min[Color.green]! * min[Color.blue]!
     })
 
-    let power = powers.reduce(0, +)
-    return "\(power)"
+    return powers.reduce(0, +)
   }
 }

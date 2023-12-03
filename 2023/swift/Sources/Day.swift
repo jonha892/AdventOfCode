@@ -3,6 +3,6 @@ protocol Day {
 
   init(input: String)
 
-  func partOne() -> String
-  func partTwo() -> String
+  func partOne() -> Int
+  func partTwo() -> Int
 }

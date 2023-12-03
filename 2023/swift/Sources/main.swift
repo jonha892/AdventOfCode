@@ -8,5 +8,5 @@ var input = parseInput(url: input_path)
 
 let day = Day3(input: input)
 
-print("part 1:", day.partOne())
-print("part 2:", day.partTwo())
+print("part 1: \(day.partOne())")
+print("part 2: \(day.partTwo())")
