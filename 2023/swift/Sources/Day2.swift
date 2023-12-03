@@ -66,8 +66,7 @@ class Day2: Day {
   }
 
   private func parseGame(_ line: String) throws -> Game {
-    // extract substring with id using a regex
-    let regex = ##/Game (\d+): /##  // OK
+    let regex = ##/Game (\d+): /##
 
     if let result = line.firstMatch(of: regex) {
       let id = Int(result.1)!

@@ -3,10 +3,10 @@
 
 import Foundation
 
-let input_path = "data/day_2.txt"
+let input_path = "data/day_3.txt"
 var input = parseInput(url: input_path)
 
-let day = Day2(input: input)
+let day = Day3(input: input)
 
 print("part 1:", day.partOne())
 print("part 2:", day.partTwo())
