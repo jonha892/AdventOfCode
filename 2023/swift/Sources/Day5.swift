@@ -73,10 +73,9 @@ struct RangeMapping: CustomStringConvertible {
     }
 
     func mapRange(_ seedRange: SeedRange) -> (SeedRange?, SeedRange?, SeedRange?) {
-        print("seed Range: \(seedRange) mapping range: \(mappingRange) destStart: \(destStart)")
-
         let (leftRemaining, overlap, rightRemaining) = try! SeedRange.seedOverlap(seed: seedRange, mapping: mappingRange)
-        print("overlap: \(overlap), leftRemaining: \(leftRemaining), rightRemaining: \(rightRemaining)")
+        //print("seed Range: \(seedRange) mapping range: \(mappingRange) destStart: \(destStart)")
+        //print("overlap: \(overlap), leftRemaining: \(leftRemaining), rightRemaining: \(rightRemaining)")
         if overlap == nil {
             return (nil, nil, nil)
         }
@@ -110,7 +109,7 @@ struct Transition {
             var currentSeedRange = range
             for (i, mapping) in rangeMappings.enumerated() {
                 let overlapps = mapping.mapRange(currentSeedRange)
-                print("i: \(i) checking seed \(currentSeedRange) mapping \(mapping) => overlapps \(overlapps)")
+                //print("i: \(i) checking seed \(currentSeedRange) mapping \(mapping) => overlapps \(overlapps)")
 
                 switch overlapps {
                 case (nil, nil, nil):
@@ -132,7 +131,7 @@ struct Transition {
                     currentSeedRange = right!
                     break
                 }
-                print("i: \(i) newSeedRanges: \(newSeedRanges)")
+                //print("i: \(i) newSeedRanges: \(newSeedRanges)")
             }
         }
         if newSeedRanges.isEmpty {
@@ -172,9 +171,7 @@ class Day5: Day {
     }
 
     func partOne() -> Int {
-        print("seeds: \(seeds)")
         let destSeeds = [transitions.reduce(70, { (v, t) in t.mapValue(v) })]
-        print("destSeeds: \(destSeeds)")
         let minSeed = destSeeds.min()!
         return minSeed
     }
@@ -190,32 +187,13 @@ class Day5: Day {
 
         var minDest = Int.max
 
-        var seedRange = SeedRange(start: 81, length: 14)
-        var rangeMapping = RangeMapping(destStart: 18, mappingRange: SeedRange(start: 25, length: 70))
-        var outRanges = rangeMapping.mapRange(seedRange)
-        print("TEST outRanges \(outRanges)")
-        print("TEST lower \(outRanges.0 == nil) && \(outRanges.1! == SeedRange(start: 74, length: 14)) && \(outRanges.2 == nil)")
-        print("")
-
-        seedRange = SeedRange(start: 74, length: 14)
-        let m1 = RangeMapping(destStart: 68, mappingRange: SeedRange(start: 63, length: 13))
-        let m2 = RangeMapping(destStart: 45, mappingRange: SeedRange(start: 77, length: 23))
-        let tra = Transition(rangeMappings: [m1, m2])
-        var res = tra.mapRanges([seedRange])
-        print("TEST Transition \(res)")
-
-        //return -1
-        print("\n\n\n")
-        /*
-        */
         for seedRange in seedRanges[...] {
             var ranges = [seedRange]
             print("process seed range: \(seedRange)")
 
-            for (i, transition) in transitions[...].enumerated() {
-                let mappedRanges = transition.mapRanges(ranges)
-                print("out ranges after transition \(i): \(mappedRanges)")
-                ranges = mappedRanges
+            for (i, transition) in transitions.enumerated() {
+                ranges = transition.mapRanges(ranges)
+                print("out ranges after transition \(i): \(ranges)")
             }
 
             let min = ranges.min(by: { (a, b) in a.start < b.start })!
