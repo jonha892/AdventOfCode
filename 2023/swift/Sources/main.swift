@@ -3,7 +3,6 @@
 
 import Foundation
 
-
 let input_path = "data/day_11.txt"
 var input = parseInput(url: input_path)
 
