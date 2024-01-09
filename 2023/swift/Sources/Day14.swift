@@ -126,6 +126,7 @@ class Day14: Day {
             } else {
                 repititionMap[dishString] = rounds
             }
+            
             dish = tiltDishRound(dish: dish)
             rounds += 1
         }
