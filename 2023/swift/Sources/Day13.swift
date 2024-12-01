@@ -1,4 +1,4 @@
-class Day12: Day {
+class Day13: Day {
   var input: String
   let mirrors: [[String]]
 
