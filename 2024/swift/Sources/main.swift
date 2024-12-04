@@ -3,8 +3,13 @@
 
 
 
-let day = Day1(
-    filename: "inputs/day1.txt"
-)
-print(day.part1())
-print(day.part2())
+do {
+    let day = try Day4(
+        filename: "inputs/day4_test.txt"
+        //filename: "inputs/day3.txt"
+    )
+    print(day.part1())
+    print(day.part2())
+} catch {
+    print("Error initializing Day: \(error)")
+}
