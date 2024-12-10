@@ -45,6 +45,7 @@ class Day3: Day {
       let pattern = #/(mul\((\d+),(\d+)\))|(do\(\))|(don't\(\))/#
         var results = [(Int, Int)]()
         
+        /*
         var instruction = Instruction.Do
         for match in self.program.matches(of: pattern) {
             // Full match
@@ -62,13 +63,14 @@ class Day3: Day {
             if instruction == .Do {
               // Access capture groups
               //print(match.2, match.3)
-              if let number1 = match.2, let number2 = match.3 {
+              let number1 = match.2!
+              let number2 = match.3!
                 //print("Numbers: \(number1) \(number2)")
-                results.append((Int(number1)!, Int(number2)!) )
-              }
+              results.append((Int(number1)!, Int(number2)!) )
             }
           }
         }
+        */
         //print(results)
         let sum = results.reduce(0) { $0 + $1.0 * $1.1 }
         return "\(sum)"

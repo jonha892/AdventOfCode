@@ -4,9 +4,9 @@
 
 
 do {
-    let day = try Day4(
-        filename: "inputs/day4_test.txt"
-        //filename: "inputs/day3.txt"
+    let day = try Day6(
+        //filename: "inputs/day6_test.txt"
+        filename: "inputs/day6.txt"
     )
     print(day.part1())
     print(day.part2())
